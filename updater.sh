@@ -9,4 +9,4 @@ mv ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua ~/.local/share/lunar
 cd ~/.config/lvim/ && { curl -O https://raw.githubusercontent.com/l0wigh/solarvim/master/config.lua ; cd ~; }
 cd ~/.local/share/lunarvim/lvim/lua/lvim/core/ && { curl -O https://raw.githubusercontent.com/l0wigh/solarvim/master/dashboard.lua; cd ~; }
 
-# svim +LvimUpdate +q
+svim +PackerUpdate
