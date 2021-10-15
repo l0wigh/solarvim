@@ -30,6 +30,18 @@ Most of it will still use the lvim nomination
 
 Only the executable will be svim and not lvim
 
+## Update
+```shell
+chmod +x updater.sh
+./updater.sh
+```
+
+This will update SolarVim to my last github configuration.
+
+It will backup the previous configuration you've done.
+
+But keep in mind that it only keep the last one, not every configuration done before.
+
 ## Uninstall
 ```shell
 chmod +x uninstaller.sh
