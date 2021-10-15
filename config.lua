@@ -199,8 +199,8 @@ lvim.builtin.which_key.mappings = {
 		name = "+Tabs",
 		n = {"<cmd>tabnew<CR>", "New Tab"},
 		c = {"<cmd>tabclose<CR>", "Close Current Tab"},
-		m = {"<cmd>tabnext<CR>", "New Tab"},
-		j = {"<cmd>tabprevious<CR>", "Close Current Tab"},
+		m = {"<cmd>tabnext<CR>", "Next Tab"},
+		j = {"<cmd>tabprevious<CR>", "Previous Tab"},
 	},
 	b = {
 		name = "+Buffer",

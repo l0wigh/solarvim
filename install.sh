@@ -9,4 +9,5 @@ cp ./dashboard.lua ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua
 mv ~/.config/lvim/config.lua ~/.config/lvim/config.lua.bak
 cp ./config.lua  ~/.config/lvim/config.lua
 mv ~/.local/bin/lvim ~/.local/bin/svim
+mkdir ~/.config/lvim/undodir
 svim +PackerUpdate
