@@ -29,7 +29,7 @@ M.config = function(config)
 			"╚════██║██║   ██║██║     ██╔══██║██╔══██╗╚██╗ ██╔╝██║██║╚██╔╝██║",
 			"███████║╚██████╔╝███████╗██║  ██║██║  ██║ ╚████╔╝ ██║██║ ╚═╝ ██║",
 			"╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
-			"Version 1.3",
+			"Version 1.4",
     },
 
     custom_section = {
@@ -80,6 +80,7 @@ M.setup = function()
     "SolarVim loaded " .. num_plugins_loaded .. " plugins ",
     "",
     lvim_site,
+	"Thanks to the LunarVim and Neovim communities",
   }
 
   if lvim_version then

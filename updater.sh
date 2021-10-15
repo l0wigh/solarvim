@@ -3,6 +3,8 @@
 echo "Updating SolarVim"
 echo "-----------------"
 
+rm ~/.config/lvim/_before_update_config.lua
+rm ~/.local/share/lunarvim/lvim/lua/lvim/core/_before_update_dashboard.lua
 mv ~/.config/lvim/config.lua ~/.config/lvim/_before_update_config.lua
 mv ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua ~/.local/share/lunarvim/lvim/lua/lvim/core/_before_update_dashboard.lua
 
