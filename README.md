@@ -24,6 +24,10 @@ Do the LunarVim initial setup and pray for the SolarVim installation to work
 
 If it worked it should start svim and update packages to add my plugins
 
+You might get an error telling you that NeoSolazied isn't found, that ok
+
+It's installed with the other plugins and will work on the next restart
+
 Keep in mind that only some \"non-important\" part of LunarVim are modified
 
 Most of it will still use the lvim nomination
