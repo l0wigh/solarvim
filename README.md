@@ -8,7 +8,7 @@ You can probably recover it since I'm creating backups of files that I change, b
 Just try it in VM or anything like that.
 
 # How to use
-
+## Install
 ```shell
 git clone https://github.com/l0wigh/solarvim/
 cd solarvim
@@ -29,6 +29,14 @@ Keep in mind that only some \"non-important\" part of LunarVim are modified
 Most of it will still use the lvim nomination
 
 Only the executable will be svim and not lvim
+
+## Uninstall
+```shell
+chmod +x uninstaller.sh
+./uninstaller.sh
+```
+
+Will put lunarvim to it previous (or stock) installation
 
 # What's different ?
 
