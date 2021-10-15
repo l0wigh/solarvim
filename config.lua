@@ -24,7 +24,7 @@ vim.cmd("set undodir=~/.config/lvim/undodir") -- create that folder you mad lads
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "delek"
 lvim.builtin.lualine.style = "default"
 vim.cmd("autocmd VimEnter * hi Normal guibg=none")
 vim.cmd("autocmd VimEnter * hi LineNr guibg=none")
