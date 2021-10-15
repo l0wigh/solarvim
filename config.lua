@@ -159,7 +159,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
-	{"mbbill/undotree"}, -- undotree
+	{"mbbill/undotree"},
 	{"kevinhwang91/rnvimr"},
 	{
 		"ray-x/lsp_signature.nvim",
@@ -193,7 +193,13 @@ lvim.builtin.which_key.mappings = {
 		h = {"<cmd>split<CR>", "Horizontal Split"},
 		v = {"<cmd>vsplit<CR>", "Veritcal Split"},
 		c = {"<cmd>:q<CR>", "Close Current Split"},
-		x = {"<C-w>x", "Swap Windows"}
+		x = {"<C-w>x", "Swap Windows"},
+		t = {"<cmd>call ToggleWindows()<CR>", "Switch Split Type"},
+
+		-- j = {"<C-w>j", "Move to left window"},
+		-- k = {"<C-w>k", "Move to bottom window"},
+		-- l = {"<C-w>l", "Move to top window"},
+		-- m = {"<C-w>m", "Move to right window"}
 	},
 	t = {
 		name = "+Tabs",
@@ -284,3 +290,18 @@ lvim.builtin.nvimtree.setup.view.mappings = {
 	custom_only = true,
 	list = newMap
 }
+
+vim.cmd [[
+	function! ToggleWindows()
+	  if !exists('t:splitType')
+	    let t:splitType = 'vertical'
+	  endif
+	  if t:splitType == 'vertical' " is vertical switch to horizontal
+    windo wincmd K
+    let t:splitType = 'horizontal'
+  else " is horizontal switch to vertical
+	    windo wincmd H
+	    let t:splitType = 'vertical'
+	  endif
+endfunction
+]]

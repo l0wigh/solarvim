@@ -1,7 +1,6 @@
 #! /bin/bash
 
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
-echo "\n\n\n"
 echo "----------------"
 echo "Installing SolarVim"
 mv ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua.bak
