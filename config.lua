@@ -7,7 +7,6 @@ a global executable or a path to
 an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
 -- general
 vim.cmd("set tabstop=4") -- tab width
 vim.cmd("set shiftwidth=4") -- tab width
@@ -99,6 +98,7 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -161,6 +161,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.plugins = {
 	{"L0Wigh/NeoSolarized"},
 	{"Pocco81/AutoSave.nvim"},
+	{"RRethy/vim-hexokinase", run = "make hexokinase"},
 	{"mbbill/undotree"},
 	{"kevinhwang91/rnvimr"},
 	{
@@ -336,3 +337,7 @@ autosave.setup(
     debounce_delay = 135
   }
 )
+
+vim.cmd([[
+  let g:Hexokinase_highlighters = ['foregroundfull']
+]])
