@@ -24,7 +24,7 @@ vim.cmd("set undodir=~/.config/lvim/undodir") -- create that folder you mad lads
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "NeoSolarized"
 lvim.builtin.lualine.style = "default"
 vim.cmd("autocmd VimEnter * hi Normal guibg=none")
 vim.cmd("autocmd VimEnter * hi LineNr guibg=none")
@@ -159,6 +159,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
+	{"L0Wigh/NeoSolarized"},
+	{"Pocco81/AutoSave.nvim"},
 	{"mbbill/undotree"},
 	{"kevinhwang91/rnvimr"},
 	{
@@ -305,3 +307,32 @@ vim.cmd [[
 	  endif
 endfunction
 ]]
+
+require("nvim-lsp-installer").settings {
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗"
+		}
+	}
+}
+
+local autosave = require("autosave")
+autosave.setup(
+  {
+    enabled = true,
+    execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+    events = {"InsertLeave", "TextChanged"},
+    conditions = {
+      exists = true,
+      filename_is_not = {"config", "config.lua"},
+      filetype_is_not = {"lua"},
+      modifiable = true
+    },
+    write_all_buffers = false,
+    on_off_commands = true,
+    clean_command_line_interval = 0,
+    debounce_delay = 135
+  }
+)
