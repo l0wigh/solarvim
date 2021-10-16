@@ -1,5 +1,5 @@
 -- SolarVim Config
--- Version 1.4.5
+-- Version 1.4.6
 
 --[[
 	TODO for version 1.5:
@@ -122,7 +122,7 @@ lvim.plugins = {
 
 lvim.builtin.which_key.mappings = {
 	["r"] = { "<cmd>RnvimrToggle<CR>", "Ranger" },
-	["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
+	["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
 	["u"] = { "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>", "Undotree" },
 	w = {
 		name = "+Windows",
