@@ -1,5 +1,6 @@
 local M = {}
-local utils = require "lvim.utils"
+local utils = require "utils"
+
 M.config = function(config)
   lvim.builtin.dashboard = {
     active = false,
@@ -8,14 +9,6 @@ M.config = function(config)
     disable_at_vim_enter = 0,
     session_directory = utils.join_paths(get_cache_dir(), "sessions"),
     custom_header = {
-			-- "	                             |                            ",
-			-- "	                         \\       /                       ",
-			-- "	                           .-'-.                          ",
-			-- "		                  --  /     \\  --                    ",
-			-- "		 `~~^~^~^~^~^~^~^~^~^-=======-~^~^~^~~^~^~^~^~^~^~^~` ",
-			-- "		 `~^_~^~^~-~^_~^~^_~-=========- -~^~^~^-~^~^_~^~^~^~` ",
-			-- "		 `~^~-~~^~^~-^~^_~^~~ -=====- ~^~^~-~^~_~^~^~~^~-~^~` ",
-			-- "		 `~^~^~-~^~~^~-~^~~-~^~^~-~^~~^-~^~^~^-~^~^~^~^~~^~-` ",
 			" ",
 			" ",
 			" ",
@@ -29,7 +22,7 @@ M.config = function(config)
 			"╚════██║██║   ██║██║     ██╔══██║██╔══██╗╚██╗ ██╔╝██║██║╚██╔╝██║",
 			"███████║╚██████╔╝███████╗██║  ██║██║  ██║ ╚████╔╝ ██║██║ ╚═╝ ██║",
 			"╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
-			"Version 1.4",
+			"Version 1.4.5",
     },
 
     custom_section = {
@@ -51,7 +44,7 @@ M.config = function(config)
       },
       e = {
         description = { "  Configuration      " },
-        command = ":e " .. config.user_config_file,
+        command = ":e " .. config.path,
       },
     },
 
@@ -88,10 +81,10 @@ M.setup = function()
     table.insert(footer, 3, "v" .. lvim_version)
   end
 
-  local text = require "lvim.interface.text"
+  local text = require "interface.text"
   vim.g.dashboard_custom_footer = text.align_center({ width = 0 }, footer, 0.49) -- Use 0.49 as  counts for 2 characters
 
-  require("lvim.core.autocmds").define_augroups {
+  require("core.autocmds").define_augroups {
     _dashboard = {
       -- seems to be nobuflisted that makes my stuff disappear will do more testing
       {
