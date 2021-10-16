@@ -1,13 +1,14 @@
---[[
-lvim is the global options object
+-- SolarVim Config
+-- Version 1.4.5
 
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
--- general
+--[[
+	TODO for version 1.5:
+		- Finish Saga setup : https://github.com/glepnir/lspsaga.nvim (Try to get definition preview autostart)
+			- Maybe look the nvim-lspconfig setup to see if I would be able to use it instead of lspsaga
+		- Push everything on github
+		- Test if it's works on wsl and alacritty
+]]--
+
 vim.cmd("set tabstop=4") -- tab width
 vim.cmd("set shiftwidth=4") -- tab width
 vim.cmd("set softtabstop=4") -- tab width
@@ -59,46 +60,16 @@ vim.cmd [[
 ]]
 
 lvim.leader = "space"
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.line_wrap_cursor_movement = false
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- lvim.builtin.telescope.on_config_done = function()
---   local actions = require "telescope.actions"
---   -- for input mode
---   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
---   -- for normal mode
---   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
--- end
-
--- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
-
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
-lvim.builtin.nvimtree.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -118,52 +89,18 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
-
--- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---   }
--- }
--- set an additional linter
--- lvim.lang.python.linters = {
---   {
---     exe = "flake8",
---   }
--- }
-
 -- Additional Plugins
 lvim.plugins = {
 	{"L0Wigh/NeoSolarized"},
+	{"glepnir/lspsaga.nvim"},
+	{"weilbith/nvim-code-action-menu", cmd = "CodeActionMenu"},
+	{'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'},
 	{"Pocco81/AutoSave.nvim"},
 	{"RRethy/vim-hexokinase", run = "make hexokinase"},
 	{"mbbill/undotree"},
 	{"kevinhwang91/rnvimr"},
+
+
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "BufRead",
@@ -182,11 +119,6 @@ lvim.plugins = {
 	},
 }
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
 lvim.builtin.which_key.mappings = {
 	["r"] = { "<cmd>RnvimrToggle<CR>", "Ranger" },
 	["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
@@ -198,11 +130,6 @@ lvim.builtin.which_key.mappings = {
 		c = {"<cmd>:q<CR>", "Close Current Split"},
 		x = {"<C-w>x", "Swap Windows"},
 		t = {"<cmd>call ToggleWindows()<CR>", "Switch Split Type"},
-
-		-- j = {"<C-w>j", "Move to left window"},
-		-- k = {"<C-w>k", "Move to bottom window"},
-		-- l = {"<C-w>l", "Move to top window"},
-		-- m = {"<C-w>m", "Move to right window"}
 	},
 	t = {
 		name = "+Tabs",
@@ -244,12 +171,22 @@ lvim.builtin.which_key.mappings = {
 			r = { "<cmd>BraceyReload<cr>", "Reload Server" },
 			e = { "<cmd>BraceyEval<cr>", "Eval Current Buffer" },
 		},
+		-- Saga
+		s = {
+			name = "+Saga",
+			r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
+			d = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Preview Definition" },
+			p = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", "Previous Diagnostics" },
+			n = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", "Next Diagnostics" },
+			-- d = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Definition" },
+			-- s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" }
+			-- a = { "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", "Code actions" },
+		},
 		-- Symbols Outline
-		s = {"<cmd>SymbolsOutline<CR>", "Show/Hide Symbols"},
+		o = {"<cmd>SymbolsOutline<CR>", "Show/Hide Symbols"},
+		c = {"<cmd>CodeActionMenu<CR>", "Show Code Action"},
 	}
 }
-
-
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local newMap = {
@@ -293,6 +230,7 @@ lvim.builtin.nvimtree.setup.view.mappings = {
 	list = newMap
 }
 
+-- Windows orientation swapping
 vim.cmd [[
 	function! ToggleWindows()
 	  if !exists('t:splitType')
@@ -340,3 +278,12 @@ autosave.setup(
 vim.cmd([[
   let g:Hexokinase_highlighters = ['foregroundfull']
 ]])
+
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({
+        max_lines = 1000;
+        max_num_results = 20;
+        sort = true;
+	run_on_every_keystroke = true;
+	snippet_placeholder = '..';
+})
