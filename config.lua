@@ -1,15 +1,12 @@
 -- SolarVim Config
--- Version 1.4.6
+-- Version 1.5
 
 --[[
-	TODO for version 1.5:
-		- Finish Saga setup : https://github.com/glepnir/lspsaga.nvim (Try to get definition preview autostart)
-			- Maybe look the nvim-lspconfig setup to see if I would be able to use it instead of lspsaga
-		- Push everything on github
-		- Test if it's works on wsl and alacritty
+	TODO for SolarVim 1.6 :
+		- ?
 ]]--
 
-
+require("solarboard")
 
 vim.cmd("set tabstop=4") -- tab width
 vim.cmd("set shiftwidth=4") -- tab width
@@ -28,6 +25,8 @@ lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "NeoSolarized"
 lvim.builtin.lualine.style = "default"
+
+-- Transparency for the background (better than the original lvim option)
 vim.cmd("autocmd VimEnter * hi Normal guibg=none")
 vim.cmd("autocmd VimEnter * hi LineNr guibg=none")
 vim.cmd("autocmd VimEnter * hi SignColumn guibg=none")
@@ -36,6 +35,7 @@ vim.cmd("autocmd VimEnter * hi MsgArea guibg=none")
 vim.cmd("autocmd VimEnter * hi TelescopeBorder guibg=none")
 vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=none")
 
+-- Force Bracey to refresh the page on reload
 vim.g.bracey_refresh_on_save = 1
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -65,7 +65,7 @@ lvim.leader = "space"
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.line_wrap_cursor_movement = false
+lvim.line_wrap_cursor_movement = false -- I hate when that option is on true, please never make it true again
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
@@ -94,9 +94,10 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- Additional Plugins
 lvim.plugins = {
 	{"L0Wigh/NeoSolarized"},
+	{'folke/lsp-colors.nvim'},
+	{'jiangmiao/auto-pairs'},
 	{"glepnir/lspsaga.nvim"},
 	{"weilbith/nvim-code-action-menu", cmd = "CodeActionMenu"},
-	{"Pocco81/AutoSave.nvim"},
 	{"RRethy/vim-hexokinase", run = "make hexokinase"},
 	{"mbbill/undotree"},
 	{"kevinhwang91/rnvimr"},
@@ -120,6 +121,7 @@ lvim.plugins = {
 	},
 }
 
+-- Custom which-key config for better mnemonic and better menu arrangement
 lvim.builtin.which_key.mappings = {
 	["r"] = { "<cmd>RnvimrToggle<CR>", "Ranger" },
 	["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
@@ -178,10 +180,8 @@ lvim.builtin.which_key.mappings = {
 			r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
 			d = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Preview Definition" },
 			p = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", "Previous Diagnostics" },
+			e = { "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", "Show Diagnostics of the line" },
 			n = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", "Next Diagnostics" },
-			-- d = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Definition" },
-			-- s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" }
-			-- a = { "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", "Code actions" },
 		},
 		-- Symbols Outline
 		o = {"<cmd>SymbolsOutline<CR>", "Show/Hide Symbols"},
@@ -189,6 +189,7 @@ lvim.builtin.which_key.mappings = {
 	}
 }
 
+-- New nvim-tree keymap for fixing a bug
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local newMap = {
 	{ key = {"<CR>"}, cb = tree_cb("edit") },
@@ -225,7 +226,7 @@ local newMap = {
 	{ key = "g?",                           cb = tree_cb("toggle_help") },
 }
 
-
+-- Asking nvim-tree to use it
 lvim.builtin.nvimtree.setup.view.mappings = {
 	custom_only = true,
 	list = newMap
@@ -247,6 +248,7 @@ vim.cmd [[
 endfunction
 ]]
 
+-- Less ugly icons for LSP Installer
 require("nvim-lsp-installer").settings {
 	ui = {
 		icons = {
@@ -257,27 +259,8 @@ require("nvim-lsp-installer").settings {
 	}
 }
 
-local autosave = require("autosave")
-autosave.setup(
-  {
-    enabled = true,
-    execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-    events = {"InsertLeave", "TextChanged"},
-    conditions = {
-      exists = true,
-      filename_is_not = {"config", "config.lua"},
-      filetype_is_not = {"lua"},
-      modifiable = true
-    },
-    write_all_buffers = false,
-    on_off_commands = true,
-    clean_command_line_interval = 0,
-    debounce_delay = 135
-  }
-)
-
+-- Hexokinase settings for beautiful colors indicator
 vim.cmd([[
   let g:Hexokinase_highlighters = ['foregroundfull']
 ]])
 
-require("solarboard")
