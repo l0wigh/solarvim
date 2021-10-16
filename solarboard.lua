@@ -1,4 +1,4 @@
-local utils = require "lvim.utils"
+local utils = require "utils"
 lvim.builtin.dashboard = {
   on_config_done = nil,
   search_handler = "telescope",
@@ -18,7 +18,7 @@ lvim.builtin.dashboard = {
     "╚════██║██║   ██║██║     ██╔══██║██╔══██╗╚██╗ ██╔╝██║██║╚██╔╝██║",
     "███████║╚██████╔╝███████╗██║  ██║██║  ██║ ╚████╔╝ ██║██║ ╚═╝ ██║",
     "╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
-    "Version 1.4",
+    "Version 1.4.5",
   },
 
   custom_section = {

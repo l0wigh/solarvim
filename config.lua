@@ -9,7 +9,6 @@
 		- Test if it's works on wsl and alacritty
 ]]--
 
-require("lua.solarboard")
 
 
 vim.cmd("set tabstop=4") -- tab width
@@ -281,3 +280,4 @@ vim.cmd([[
   let g:Hexokinase_highlighters = ['foregroundfull']
 ]])
 
+require("solarboard")
