@@ -4,11 +4,12 @@ echo "Uninstalling SolarVim..."
 echo "------------------------"
 
 # removing SolvarVim dashboard
-rm ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua
-mv ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua.bak ~/.local/share/lunarvim/lvim/lua/lvim/core/dashboard.lua
+rm ~/.config/lvim/lua/solarboard.lua
+rm ~/.config/lvim/lua/_before_update_solarboard.lua
 
 # removing SolvarVim Config
 rm ~/.config/lvim/config.lua
+rm ~/.config/lvim/_before_update_config.lua
 mv ~/.config/lvim/config.lua.bak ~/.config/lvim/config.lua
 
 # switching svim to lvim
