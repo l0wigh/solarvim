@@ -94,6 +94,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- Additional Plugins
 lvim.plugins = {
 	{"L0Wigh/NeoSolarized"},
+	{"L0Wigh/solartools"},
 	{'folke/zen-mode.nvim'},
 	{'folke/lsp-colors.nvim'},
 	{'jiangmiao/auto-pairs'},
