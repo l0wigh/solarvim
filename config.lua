@@ -1,10 +1,5 @@
 -- SolarVim Config
--- Version 1.5
-
---[[
-	TODO for SolarVim 1.6 :
-		- ?
-]]--
+-- Version 1.5.1
 
 require("solarboard")
 
@@ -20,6 +15,11 @@ vim.cmd("set noswapfile") -- remove horrible swap files
 vim.cmd("set nobackup") -- no need for backup, we are responsible
 vim.cmd("set undofile") -- undo files for undo tree
 vim.cmd("set undodir=~/.config/lvim/undodir") -- create that folder you mad lads
+
+vim.cmd [[
+	set list
+	set listchars=tab:\∙\ 
+]]
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
@@ -40,25 +40,25 @@ vim.g.bracey_refresh_on_save = 1
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 vim.cmd [[
-  nnoremap j h
-  nnoremap k j
-  nnoremap l k
-  nnoremap m l
-  nnoremap h m
-  nnoremap ù 0
+	nnoremap j h
+	nnoremap k j
+	nnoremap l k
+	nnoremap m l
+	nnoremap h m
+	nnoremap ù 0
 
-  vnoremap j h
-  vnoremap k j
-  vnoremap l k
-  vnoremap m l
-  vnoremap h m
-  vnoremap ù 0
+	vnoremap j h
+	vnoremap k j
+	vnoremap l k
+	vnoremap m l
+	vnoremap h m
+	vnoremap ù 0
 
-  nnoremap <C-w>j <C-w>h
-  nnoremap <C-w>k <C-w>j
-  nnoremap <C-w>l <C-w>k
-  nnoremap <C-w>m <C-w>l
-  nnoremap <C-w>h <C-w>m
+	nnoremap <C-w>j <C-w>h
+	nnoremap <C-w>k <C-w>j
+	nnoremap <C-w>l <C-w>k
+	nnoremap <C-w>m <C-w>l
+	nnoremap <C-w>h <C-w>m
 ]]
 
 lvim.leader = "space"
@@ -75,17 +75,17 @@ lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "css",
-  "rust",
-  "java",
-  "yaml",
+	"bash",
+	"c",
+	"javascript",
+	"json",
+	"lua",
+	"python",
+	"typescript",
+	"css",
+	"rust",
+	"java",
+	"yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -94,14 +94,11 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- Additional Plugins
 lvim.plugins = {
 	{"L0Wigh/NeoSolarized"},
+	{'folke/zen-mode.nvim'},
 	{'folke/lsp-colors.nvim'},
 	{'jiangmiao/auto-pairs'},
-	{"glepnir/lspsaga.nvim"},
-	{"weilbith/nvim-code-action-menu", cmd = "CodeActionMenu"},
 	{"RRethy/vim-hexokinase", run = "make hexokinase"},
 	{"mbbill/undotree"},
-	{"kevinhwang91/rnvimr"},
-
 
 	{
 		"ray-x/lsp_signature.nvim",
@@ -110,22 +107,30 @@ lvim.plugins = {
 			require("lsp_signature").setup()
 		end
 	},
+
 	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline"
 	},
+
 	{
 		"turbio/bracey.vim",
 		cmd = {"Bracey", "BraceyStop", "BraceyReload", "BraceyEval"},
 		run = "npm install --prefix server"
 	},
+
+	{
+		'vimwiki/vimwiki',
+		branch = 'dev',
+		cmd = {"VimwikiIndex", "VimwikiDiaryIndex"}
+	},
 }
 
 -- Custom which-key config for better mnemonic and better menu arrangement
 lvim.builtin.which_key.mappings = {
-	["r"] = { "<cmd>RnvimrToggle<CR>", "Ranger" },
 	["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
 	["u"] = { "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>", "Undotree" },
+	-- Vim windows stuff mappings
 	w = {
 		name = "+Windows",
 		h = {"<cmd>split<CR>", "Horizontal Split"},
@@ -134,6 +139,25 @@ lvim.builtin.which_key.mappings = {
 		x = {"<C-w>x", "Swap Windows"},
 		t = {"<cmd>call ToggleWindows()<CR>", "Switch Split Type"},
 	},
+	-- Custom shortcuts
+	s = {
+		name = "+Shortcuts",
+		w = {'"0yw/<C-r>0<CR>', "Search the current word"},
+	},
+	-- Native LSP functions mappings
+	l = {
+		name = "+LSP",
+		D = {":lua vim.lsp.buf.definition()<CR>", "Show definition"},
+		d = {":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show diagnostic for the line"},
+		i = {":lua vim.lsp.buf.implementation()<CR>", "Show implementation"},
+		s = {":lua vim.lsp.buf.signature_help()<CR>", "Show signature help"},
+		R = {":lua vim.lsp.buf.references()<CR>", "Show references"},
+		r = {":lua vim.lsp.buf.rename()<CR>", "Show rename"},
+		h = {":lua vim.lsp.buf.hover()<CR>", "Show hover"},
+		c = {":lua vim.lsp.buf.code_action()<CR>", "Show code action"},
+		n = {":lua vim.lsp.diagnostic.goto_next()<CR>", "Show next diagnostic"},
+	},
+	-- Vim tabs stuff mappings
 	t = {
 		name = "+Tabs",
 		n = {"<cmd>tabnew<CR>", "New Tab"},
@@ -141,6 +165,7 @@ lvim.builtin.which_key.mappings = {
 		m = {"<cmd>tabnext<CR>", "Next Tab"},
 		j = {"<cmd>tabprevious<CR>", "Previous Tab"},
 	},
+	-- Vim buffers stuff mappings
 	b = {
 		name = "+Buffer",
 		p = {"<cmd>BufferPin<CR>", "Pin Buffer"},
@@ -148,8 +173,25 @@ lvim.builtin.which_key.mappings = {
 		a = {"<cmd>BufferCloseAllButPinned<CR>", "Close All But Pinned"},
 		c = {"<cmd>BufferClose!<CR>", "Close Buffer"},
 	},
+	-- Plugins mappings
 	p = {
 		name = "+Plugins",
+		-- VimWiki
+		w = {
+			name = "+VimWiki",
+			w = {"<cmd>VimwikiIndex<CR>", "Show your index wiki file"},
+			d = {"<cmd>VimwikiDiaryIndex<CR>", "Show your diary index file"},
+			D = {"<cmd>VimwikiMakeDiaryNote<CR>", "Open your diary for the current day"},
+			b = {"<cmd>VimwikiGoBackLink<CR>", "Go back to the wiki page you came from"},
+			x = {"<cmd>VimwikiDeleteFile<CR>", "Delete the current wiki file"},
+			r = {"<cmd>VimwikiRenameFile<CR>", "Rename the current wiki file"},
+			t = {"<cmd>VimwikiNextTask<CR>", "Go to the next unfinished task"},
+			T = {":VimwikiTable  ", "Create a new table"},
+			c = {"<cmd>VimwikiToggleListItem<CR>", "Check/Uncheck the current list item"},
+			C = {"<cmd>VimwikiColorize<CR><cmd>s/background/color/g<CR>", "Add yellow color to the current line"},
+			s = {"<cmd>VimwikiChangeSymbolTo -<CR>", "Create a list item on the current line"},
+			n = {"<cmd>VimwikiListToggle<CR>", "Create a task on the current line"},
+		},
 		-- Telescope
 		t = {
 			name = "+Telescope" ,
@@ -174,18 +216,9 @@ lvim.builtin.which_key.mappings = {
 			r = { "<cmd>BraceyReload<cr>", "Reload Server" },
 			e = { "<cmd>BraceyEval<cr>", "Eval Current Buffer" },
 		},
-		-- Saga
-		s = {
-			name = "+Saga",
-			r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
-			d = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Preview Definition" },
-			p = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", "Previous Diagnostics" },
-			e = { "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", "Show Diagnostics of the line" },
-			n = { "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", "Next Diagnostics" },
-		},
 		-- Symbols Outline
 		o = {"<cmd>SymbolsOutline<CR>", "Show/Hide Symbols"},
-		c = {"<cmd>CodeActionMenu<CR>", "Show Code Action"},
+		z = {"<cmd>ZenMode<CR>", "Start ZenMode"},
 	}
 }
 
@@ -261,6 +294,7 @@ require("nvim-lsp-installer").settings {
 
 -- Hexokinase settings for beautiful colors indicator
 vim.cmd([[
-  let g:Hexokinase_highlighters = ['foregroundfull']
+	let g:Hexokinase_highlighters = ['foregroundfull']
 ]])
 
+vim.cmd("let g:vimwiki_listsyms = ' ~~~✓'")

@@ -10,3 +10,4 @@ cp ./solarboard.lua ~/.config/lvim/lua/
 mv ~/.local/bin/lvim ~/.local/bin/svim
 mkdir ~/.config/lvim/undodir
 svim +PackerUpdate
+svim +PackerSync
