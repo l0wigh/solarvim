@@ -128,7 +128,7 @@ lvim.plugins = {
 
 -- Custom which-key config for better mnemonic and better menu arrangement
 lvim.builtin.which_key.mappings = {
-	["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
+	["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
 	["u"] = { "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>", "Undotree" },
 	-- Vim windows stuff mappings
 	w = {
