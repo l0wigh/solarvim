@@ -131,6 +131,11 @@ lvim.plugins = {
 lvim.builtin.which_key.mappings = {
 	["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
 	["u"] = { "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>", "Undotree" },
+	-- SolarVim Tools
+	S = {
+		name = "+SolarVim",
+		w = {'<cmd>call SolarUpdate()<CR>', "Update SolarVim"},
+	},
 	-- Vim windows stuff mappings
 	w = {
 		name = "+Windows",
