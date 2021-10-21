@@ -1,5 +1,5 @@
 -- SolarVim Config
--- Version 1.5.1
+-- Version 1.5.2-DEV-1
 
 require("solarboard")
 
@@ -134,7 +134,7 @@ lvim.builtin.which_key.mappings = {
 	-- SolarVim Tools
 	S = {
 		name = "+SolarVim",
-		w = {'<cmd>call SolarUpdate()<CR>', "Update SolarVim"},
+		u = {'<cmd>call SolarUpdate()<CR>', "Update SolarVim"},
 	},
 	-- Vim windows stuff mappings
 	w = {
