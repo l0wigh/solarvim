@@ -4,6 +4,8 @@ Custom config for LunarVim
 
 # DEPRECATED, NO MORE UPDATE
 
+See [LionVim](https://github.com/L0Wigh/LionVim)
+
 # KEEP IN MIND THAT INSTALLING SolarVim WILL ERASE YOUR LunarVim SETUP
 You can probably recover it since I'm creating backups of files that I change, but don't take any risk
 
